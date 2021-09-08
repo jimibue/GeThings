@@ -12,14 +12,14 @@ import NavBar from "./Navbar";
 function App() {
   return (
     <>
-      <NavBar />
+    <p>here</p>
       <Container>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/ges" component={Ges} />
-          <Route exact path="/ges/new" component={GeFormNew} />
-          <Route exact path="/ges/:id" component={Ge} />
-          <Route exact path="/ges/:id/edit" component={GeFormEdit} />
+          <Route exact path="/gess" component={Ges} />
+          <Route exact path="/gess/new" component={GeFormNew} />
+          <Route exact path="/gess/:idd" component={Ge} />
+          <Route exact path="/gess/:id/edit" component={GeFormEdit} />
         </Switch>
       </Container>
     </>
