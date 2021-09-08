@@ -1,0 +1,2 @@
+class GesController < ApplicationController
+end
