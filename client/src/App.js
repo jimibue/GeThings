@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/ges" component={Ges} />
           <Route exact path="/ges/new" component={GeFormNew} />
-          <Route exact path="/ges/:idd" component={Ge} />
+          <Route exact path="/ges/:id" component={Ge} />
           <Route exact path="/ges/:id/edit" component={GeFormEdit} />
         </Switch>
       </Container>
