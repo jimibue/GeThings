@@ -1,3 +1,4 @@
 class Ge < ApplicationRecord
-  has_many :things
+  validates :name, presence: true
+  has_many :things, dependent: :destroy
 end
