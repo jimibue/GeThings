@@ -3,13 +3,6 @@ import axios from "axios";
 import { Button, Card, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-// api/ges => [{id, name, description, category}]
-
-const dummyGes = [
-  { id: 1, name: "Ge1", description: "descprition 1", category: "cat1" },
-  { id: 2, name: "Ge2", description: "descprition 2", category: "cat3" },
-];
-
 const Ges = () => {
   const [ges, setGes] = useState([]);
 
@@ -22,9 +15,7 @@ const Ges = () => {
       let res = await axios.get("/api/ges");
       setGes(res.data);
     } catch (err) {
-      setGes(dummyGes);
-      // could error
-      // console.log(err);
+      console.log(err);
     }
   };
 
@@ -33,9 +24,7 @@ const Ges = () => {
       let res = await axios.delete(`/api/ges/${id}`);
       setGes(ges.filter((g) => g.id !== id));
     } catch (err) {
-      setGes(ges.filter((g) => g.id !== id));
-      // could error
-      // console.log(err);
+      console.log(err);
     }
   };
 
