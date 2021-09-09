@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "semantic-ui-react";
+import Thing from "./Thing";
 
 // get -> 'api/ges/ge_id/things' =>
 //res.data... {ge: {id, name, desctription}, things:[{id,name}]}
@@ -35,6 +36,7 @@ const dummyresData = {
 const Ge = (props) => {
   const [ge, setGe] = useState({});
   const [things, setThings] = useState([]);
+  const [showform, setShowForm] = useState(true);
   useEffect(() => {
     getData();
   }, []);
@@ -61,22 +63,16 @@ const Ge = (props) => {
   };
 
   const renderThings = () => {
-    return things.map((t) => {
-      return (
-        <Card style={{ width: "100%" }}>
-          <Card.Content header={t.name} />
-          <Button.Group style={{ width: "200px" }}>
-            <Button color="blue">edit</Button>
-          </Button.Group>
-        </Card>
-      );
-    });
+    return things.map((t) => <Thing {...t} />);
   };
 
   return (
     <div>
       <p>id from react router(use this): {props.match.params.id}</p>
-
+      <Button onClick={() => setShowForm(!showform)}>
+        {showform ? "hide form" : "show form"}
+      </Button>
+      {showform && <p>form</p>}
       {renderGe()}
       {renderThings()}
     </div>
