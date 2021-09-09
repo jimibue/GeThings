@@ -84,7 +84,7 @@ const Ge = (props) => {
       setThings(things.filter((t) => t.id !== thing_id));
     } catch (err) {
       console.log(err);
-      setThings(things.filter((t) => t.id !== thing_id));
+      // setThings(things.filter((t) => t.id !== thing_id));
     }
   };
 
