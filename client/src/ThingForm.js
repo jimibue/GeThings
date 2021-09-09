@@ -1,19 +1,42 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Button, Form, Input } from "semantic-ui-react";
+import { Button, Form, Input, Segment } from "semantic-ui-react";
 
 const ThingForm = (props) => {
   const [name, setName] = useState(props.name ? props.name : "");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    if (props.id) {
+      try {
+        let res = await axios.put(`/api/ges/${props.ge_id}/things/${props.id}`);
+        props.updateThing(res.data);
+        props.setShowForm(false);
+      } catch (err) {
+        alert(err);
+        console.log(err);
+      }
+      //update
+    } else {
+      // create
+      try {
+        let res = await axios.post(`/api/ges/${props.ge_id}/things`);
+        props.addThing(res.data);
+      } catch (error) {
+        alert(err);
+        console.log(error);
+      }
+    }
     console.log(name);
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Field>
-        <label>name</label>
-        <Input value={name} onChange={(e, { value }) => setName(value)} />
-      </Form.Field>
-      <Button type="submit">{props.id ? "update" : "add"}</Button>
-    </Form>
+    <Segment>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field>
+          <label>name</label>
+          <Input value={name} onChange={(e, { value }) => setName(value)} />
+        </Form.Field>
+        <Button type="submit">{props.id ? "update" : "add"}</Button>
+      </Form>
+    </Segment>
   );
 };
 

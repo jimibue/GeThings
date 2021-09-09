@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, Segment } from "semantic-ui-react";
 import Thing from "./Thing";
 import ThingForm from "./ThingForm";
 
@@ -48,33 +48,67 @@ const Ge = (props) => {
       setGe(res.data.ge);
       setThings(res.data.things);
     } catch (err) {
-      setGe(dummyresData.ge);
-      setThings(dummyresData.things);
-      // alert(err);
-      // console.log(err);
+      // setGe(dummyresData.ge);
+      // setThings(dummyresData.things);
+      alert(err);
+      console.log(err);
     }
+  };
+
+  const addThing = (thing) => {
+    // adding thing to UI
+    setThings([thing, ...things]);
+  };
+
+  const updateThing = (thing) => {
+    // update thing to UI
+    const updateThings = things.map((t) => (t.id === thing.id ? thing : t));
+    setThings(updateThings);
   };
   const renderGe = () => {
     return (
-      <div>
+      <Segment>
         <h1>{ge.name}</h1>
         <h1>{ge.description}</h1>
-      </div>
+      </Segment>
     );
   };
 
+  const deleteThing = async (thing_id) => {
+    console.log(thing_id);
+    try {
+      let res = await axios.delete(
+        `/api/ges/${props.match.params.id}/things/${thing_id}`
+      );
+      // remove from UI
+      setThings(things.filter((t) => t.id !== thing_id));
+    } catch (err) {
+      console.log(err);
+      setThings(things.filter((t) => t.id !== thing_id));
+    }
+  };
+
   const renderThings = () => {
-    return things.map((t) => <Thing {...t} />);
+    return things.map((t) => (
+      <Thing
+        deleteThing={deleteThing}
+        ge_id={props.match.params.id}
+        updateThing={updateThing}
+        {...t}
+      />
+    ));
   };
 
   return (
     <div>
       <p>id from react router(use this): {props.match.params.id}</p>
-      <Button onClick={() => setShowForm(!showform)}>
-        {showform ? "hide form" : "show form"}
-      </Button>
-      {showform && <ThingForm />}
       {renderGe()}
+      <Button onClick={() => setShowForm(!showform)}>
+        {showform ? "hide form" : "New Thing"}
+      </Button>
+      {showform && (
+        <ThingForm ge_id={props.match.params.id} addThing={addThing} />
+      )}
       {renderThings()}
     </div>
   );
