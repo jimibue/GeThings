@@ -21,7 +21,7 @@ const ThingForm = (props) => {
         let res = await axios.post(`/api/ges/${props.ge_id}/things`);
         props.addThing(res.data);
       } catch (error) {
-        alert(err);
+        alert(error);
         console.log(error);
       }
     }
