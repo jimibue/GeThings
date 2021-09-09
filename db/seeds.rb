@@ -8,7 +8,7 @@
 
 ge = Ge.create(name:'yo')
 ge1 = Ge.create(name:'yo1')
-ge.things.create(name:'ge hello')
-ge.things.create(name:'ge hello1')
-ge1.things.create(name:'ge1 hello1')
+ge.things.create(name:'ge1 hello')
+ge.things.create(name:'ge1 hello1')
+ge1.things.create(name:'ge2 hello1')
 ge1.things.create(name:'ge2 hello1')
