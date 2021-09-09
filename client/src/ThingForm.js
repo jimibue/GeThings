@@ -7,9 +7,13 @@ const ThingForm = (props) => {
   const handleSubmit = async (e) => {
     if (props.id) {
       try {
-        let res = await axios.put(`/api/ges/${props.ge_id}/things/${props.id}`);
+        let res = await axios.put(
+          `/api/ges/${props.ge_id}/things/${props.id}`,
+          { name }
+        );
         props.updateThing(res.data);
         props.setShowForm(false);
+        setName("");
       } catch (err) {
         alert(err);
         console.log(err);
@@ -18,8 +22,9 @@ const ThingForm = (props) => {
     } else {
       // create
       try {
-        let res = await axios.post(`/api/ges/${props.ge_id}/things`);
+        let res = await axios.post(`/api/ges/${props.ge_id}/things`, { name });
         props.addThing(res.data);
+        setName("");
       } catch (error) {
         alert(error);
         console.log(error);
