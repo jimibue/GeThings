@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "semantic-ui-react";
 import Thing from "./Thing";
+import ThingForm from "./ThingForm";
 
 // get -> 'api/ges/ge_id/things' =>
 //res.data... {ge: {id, name, desctription}, things:[{id,name}]}
@@ -72,7 +73,7 @@ const Ge = (props) => {
       <Button onClick={() => setShowForm(!showform)}>
         {showform ? "hide form" : "show form"}
       </Button>
-      {showform && <p>form</p>}
+      {showform && <ThingForm />}
       {renderGe()}
       {renderThings()}
     </div>
