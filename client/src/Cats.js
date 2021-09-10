@@ -18,6 +18,14 @@ const Cats = () => {
       console.log(err);
     }
   };
+  const deleteCat = async (id) => {
+    try {
+      let res = await axios.delete(`/api/cats/${id}`);
+      setCats(cats.filter((c) => c.id !== id));
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   const renderCats = () => {
     return cats.map((c) => {
@@ -25,8 +33,8 @@ const Cats = () => {
         <Segment>
           <Header>{c.name}</Header>
           <div>
-            <Link to={`cats/${c.id}/edit`}>edit</Link>
-            <Icon name="trash"></Icon>
+            <Link to={{ pathname: `cats/${c.id}/edit`, cat: c }}>edit</Link>
+            <Icon onClick={() => deleteCat(c.id)} name="trash"></Icon>
           </div>
         </Segment>
       );
