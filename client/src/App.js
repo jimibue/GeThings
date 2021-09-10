@@ -9,6 +9,7 @@ import GeFormNew from "./GeFormNew";
 import GeFormEdit from "./GeFormEdit";
 import NavBar from "./Navbar";
 import About from "./About";
+import Cats from "./Cats";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/ges" component={Ges} />
+          <Route exact path="/cats" component={Cats} />
           <Route exact path="/ges/new" component={GeFormNew} />
           <Route exact path="/ges/:id" component={Ge} />
           <Route exact path="/ges/:id/edit" component={GeFormEdit} />
