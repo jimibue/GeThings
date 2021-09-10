@@ -8,6 +8,7 @@ import { Container } from "semantic-ui-react";
 import GeFormNew from "./GeFormNew";
 import GeFormEdit from "./GeFormEdit";
 import NavBar from "./Navbar";
+import About from "./About";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Container>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/ges" component={Ges} />
           <Route exact path="/ges/new" component={GeFormNew} />
           <Route exact path="/ges/:id" component={Ge} />
